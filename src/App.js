@@ -35,7 +35,7 @@ const App = () => {
   return (
     <div>
       <Accordion items={items} />
-      <button onClick={onSearch(searchTerm)}></button>
+      <button onClick={() => onSearch(searchTerm)}>Click me!</button>
     </div>
   );
 };
