@@ -1,5 +1,12 @@
 import React from "react";
 import Accordion from "./components/Accordion";
+// import wikipedia from "../api/wikipedia";
+
+const searchTerm = "Turing";
+
+const onSearch = async (term) => {
+  // const response = await wikipedia.get('?srsearch');
+};
 
 const items = [
   {
