@@ -1,20 +1,6 @@
 import React from "react";
-import wikipedia from "./api/wikipedia";
 import Accordion from "./components/Accordion";
-
-const searchTerm = "Turing";
-
-const onSearch = async (term) => {
-  const response = await wikipedia.get("?srsearch", {
-    params: {
-      // action: "query",
-      // list: "search",
-      srsearch: term,
-      // format: "json"
-    },
-  });
-  console.log(response);
-};
+import Search from "./components/Search";
 
 const items = [
   {
@@ -34,8 +20,8 @@ const items = [
 const App = () => {
   return (
     <div>
+      <Search />
       <Accordion items={items} />
-      <button onClick={() => onSearch(searchTerm)}>Click me!</button>
     </div>
   );
 };
