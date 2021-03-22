@@ -24,17 +24,32 @@ const Search = () => {
     setResults(response.data.query.search);
   };
 
+  const renderResults = results.map((result) => {
+    return (
+      <div class="item">
+        <i class="large github middle aligned icon"></i>
+        <div class="content">
+          <a class="header">Semantic-Org/Semantic-UI</a>
+          <div class="description">Updated 10 mins ago</div>
+        </div>
+      </div>
+    );
+  });
+
   return (
-    <div className="ui action input">
-      <input
-        type="text"
-        placeholder="Search..."
-        onChange={onInputChange}
-      ></input>
-      <button className="ui button" onClick={() => onSearch(term)}>
-        <i className="search icon"></i>Search
-      </button>
-    </div>
+    <>
+      <div className="ui action input">
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={onInputChange}
+        ></input>
+        <button className="ui button" onClick={() => onSearch(term)}>
+          <i className="search icon"></i>Search
+        </button>
+      </div>
+      <div class="ui relaxed divided list">{renderResults}</div>
+    </>
   );
 };
 
