@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import wikipedia from "./api/wikipedia";
+import React from "react";
 import Accordion from "./components/Accordion";
-
-const searchTerm = "Turing";
+import Search from "./components/Search";
 
 const items = [
   {
@@ -20,25 +18,10 @@ const items = [
 ];
 
 const App = () => {
-  const [results, setResults] = useState([]);
-  const onSearch = async (term) => {
-    const response = await wikipedia.get("", {
-      params: {
-        action: "query",
-        list: "search",
-        srsearch: term,
-        format: "json",
-        origin: "*",
-      },
-    });
-    console.log(response);
-    setResults(response.data.query.search);
-  };
-
   return (
     <div>
+      <Search />
       <Accordion items={items} />
-      <button onClick={() => onSearch(searchTerm)}>Click me!</button>
     </div>
   );
 };
