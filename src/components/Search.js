@@ -24,13 +24,15 @@ const Search = () => {
     setResults(response.data.query.search);
   };
 
+  console.log(results);
+
   const renderResults = results.map((result) => {
     return (
-      <div class="item">
-        <i class="large github middle aligned icon"></i>
-        <div class="content">
-          <a class="header">Semantic-Org/Semantic-UI</a>
-          <div class="description">Updated 10 mins ago</div>
+      <div className="item" key={result.pageId}>
+        <i className="large github middle aligned icon"></i>
+        <div className="content">
+          <h3 className="header">{result.title}</h3>
+          <div className="description">{result.snippet}</div>
         </div>
       </div>
     );
@@ -48,7 +50,7 @@ const Search = () => {
           <i className="search icon"></i>Search
         </button>
       </div>
-      <div class="ui relaxed divided list">{renderResults}</div>
+      <div className="ui relaxed divided list">{renderResults}</div>
     </>
   );
 };
