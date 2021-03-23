@@ -39,19 +39,18 @@ const Search = () => {
   });
 
   return (
-    <>
-      <div className="ui action input">
-        <input
-          type="text"
-          placeholder="Search..."
-          onChange={onInputChange}
-        ></input>
-        <button className="ui button" onClick={() => onSearch(term)}>
-          <i className="search icon"></i>Search
-        </button>
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <input
+            type="text"
+            placeholder="Search for..."
+            onChange={onInputChange}
+          ></input>
+        </div>
       </div>
       <div className="ui relaxed divided list">{renderResults}</div>
-    </>
+    </div>
   );
 };
 
