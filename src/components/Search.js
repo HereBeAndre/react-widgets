@@ -34,11 +34,18 @@ const Search = () => {
 
   const renderResults = results.map((result) => {
     return (
-      <div className="item" key={result.pageId}>
-        <i className="large github middle aligned icon"></i>
+      <div className="item" key={result.pageid}>
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+            target="blank"
+          >
+            Go
+          </a>
+        </div>
         <div className="content">
           <h3 className="header">{result.title}</h3>
-          <div className="description">{result.snippet}</div>
         </div>
       </div>
     );
@@ -56,7 +63,7 @@ const Search = () => {
           ></input>
         </div>
       </div>
-      <div className="ui relaxed divided list">{renderResults}</div>
+      <div className="ui celled list">{renderResults}</div>
     </div>
   );
 };
