@@ -24,10 +24,13 @@ const Search = () => {
       setResults(response.data.query.search);
     };
 
-    if (term) {
+    // Use timeoutId to clearInterval when necessary
+    const timeoutId = setTimeout(() => {
       // TO AVOID ERROR ON FIRST RENDER (when term is "");
-      search();
-    }
+      if (term) {
+        search();
+      }
+    }, 500);
   }, [term]);
 
   console.log(results);
