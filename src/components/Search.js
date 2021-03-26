@@ -24,10 +24,22 @@ const Search = () => {
       setResults(response.data.query.search);
     };
 
-    if (term) {
-      // TO AVOID ERROR ON FIRST RENDER (when term is "");
+    if (term && !results.length) {
       search();
+    } else {
+      // Use timeoutId to clearTimeout for delaying call based on user input
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          search();
+        }
+      }, 1000);
+      // return callback to clearTimeout (make call to API 1" after user last keystroke)
+      return () => {
+        console.log("cleaning");
+        clearTimeout(timeoutId);
+      };
     }
+    // TO AVOID ERROR ON FIRST RENDER (when term is "");
   }, [term]);
 
   console.log(results);
