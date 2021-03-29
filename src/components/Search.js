@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import wikipedia from "../api/wikipedia";
 
 const Search = () => {
-  const [results, setResults] = useState([]);
   const [term, setTerm] = useState("colnago");
   const [debouncedTerm, setDebouncedTerm] = useState(term);
+  const [results, setResults] = useState([]);
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Search = () => {
 
     // return callback to clearTimeout (clear timeout if user is still typing - 1" threshold above)
     return () => {
-      clearInterval(timerId);
+      clearTimeout(timerId);
     };
   }, [term]);
 
@@ -37,7 +37,8 @@ const Search = () => {
       });
       setResults(response.data.query.search);
     };
-    search();
+
+    debouncedTerm && search();
   }, [debouncedTerm]);
 
   console.log(results);
