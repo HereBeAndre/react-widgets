@@ -3,7 +3,7 @@ import wikipedia from "../api/wikipedia";
 
 const Search = () => {
   const [results, setResults] = useState([]);
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState("colnago");
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -24,6 +24,7 @@ const Search = () => {
       setResults(response.data.query.search);
     };
 
+    // TO AVOID ERROR ON FIRST RENDER (when term is "");
     if (term && !results.length) {
       search();
     } else {
@@ -39,8 +40,7 @@ const Search = () => {
         clearTimeout(timeoutId);
       };
     }
-    // TO AVOID ERROR ON FIRST RENDER (when term is "");
-  }, [term]);
+  }, [term, results.length]);
 
   console.log(results);
 
