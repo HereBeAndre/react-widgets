@@ -2,13 +2,27 @@ import React, { useEffect, useState } from "react";
 import wikipedia from "../api/wikipedia";
 
 const Search = () => {
+  const [term, setTerm] = useState("colnago");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
-  const [term, setTerm] = useState("");
 
   const onInputChange = (e) => {
     e.preventDefault();
     setTerm(e.target.value);
   };
+
+  // useEffect to update debouncedTerm when user enters a term
+  useEffect(() => {
+    // Use timeoutId to clearTimeout for delaying call based on user input
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    // return callback to clearTimeout (clear timeout if user is still typing - 1" threshold above)
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -18,29 +32,14 @@ const Search = () => {
           list: "search",
           origin: "*",
           format: "json",
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
       setResults(response.data.query.search);
     };
 
-    if (term && !results.length) {
-      search();
-    } else {
-      // Use timeoutId to clearTimeout for delaying call based on user input
-      const timeoutId = setTimeout(() => {
-        if (term) {
-          search();
-        }
-      }, 1000);
-      // return callback to clearTimeout (make call to API 1" after user last keystroke)
-      return () => {
-        console.log("cleaning");
-        clearTimeout(timeoutId);
-      };
-    }
-    // TO AVOID ERROR ON FIRST RENDER (when term is "");
-  }, [term]);
+    debouncedTerm && search();
+  }, [debouncedTerm]);
 
   console.log(results);
 
