@@ -13,6 +13,7 @@ const Dropdown = ({ options, selected, onChangeSelected }) => {
         key={option.color}
         value={option.color}
         className="item"
+        style={{ color: option.color }}
         onClick={() => onChangeSelected(option)}
       >
         {option.label}
