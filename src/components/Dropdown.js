@@ -2,10 +2,15 @@ import React from "react";
 
 const Dropdown = ({ options, selected, onChangeSelected }) => {
   const dropdownOptions = options.map((option) => {
+    // Hide already selected option from dropdown by returning null
+    if (option.color === selected.color) {
+      return null;
+    }
+
     return (
       <div
-        key={option.value}
-        value={option.value}
+        key={option.color}
+        value={option.color}
         className="item"
         onClick={() => onChangeSelected(option)}
       >
