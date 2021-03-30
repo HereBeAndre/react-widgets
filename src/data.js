@@ -8,8 +8,8 @@ export const options = [
     color: "red",
   },
   {
-    label: "A warm yellow",
-    color: "yellow",
+    label: "A warm orange",
+    color: "orange",
   },
   {
     label: "A relaxing green",
