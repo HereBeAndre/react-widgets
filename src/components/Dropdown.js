@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Dropdown = ({ options, selected, onChangeSelected }) => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.addEventListener(
+      "click",
+      () => {
+        setOpen(false);
+      },
+      { capture: true }
+    );
+  }, []);
+
   const dropdownOptions = options.map((option) => {
     // Hide already selected option from dropdown by returning null
     if (option.color === selected.color) {
