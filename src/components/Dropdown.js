@@ -4,6 +4,8 @@ const Dropdown = ({ options, selected, onChangeSelected }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
+  console.log(selected);
+
   useEffect(() => {
     const onBodyClick = (event) => {
       if (ref.current && ref.current.contains(event.target)) {
@@ -52,6 +54,7 @@ const Dropdown = ({ options, selected, onChangeSelected }) => {
             {dropdownOptions}
           </div>
         </div>
+        <p style={{ color: selected.color }}>{selected.label}</p>
       </div>
     </div>
   );
