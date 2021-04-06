@@ -41,8 +41,6 @@ const Search = () => {
     debouncedTerm && search();
   }, [debouncedTerm]);
 
-  console.log(results);
-
   const renderResults = results.map((result) => {
     return (
       <div className="item" key={result.pageid}>
