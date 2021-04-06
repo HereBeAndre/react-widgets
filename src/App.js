@@ -31,6 +31,7 @@ const App = () => {
         selected={selected}
         onChangeSelected={setSelected}
         options={options}
+        label="Select a color"
       />
       <Translate />
     </div>

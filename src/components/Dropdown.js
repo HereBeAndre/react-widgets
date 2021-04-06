@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 
-const Dropdown = ({ options, selected, onChangeSelected }) => {
+const Dropdown = ({ options, selected, onChangeSelected, label }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
-
-  console.log(selected);
 
   useEffect(() => {
     const onBodyClick = (event) => {
@@ -14,26 +12,28 @@ const Dropdown = ({ options, selected, onChangeSelected }) => {
       setOpen(false);
     };
 
-    document.body.addEventListener("click", onBodyClick);
+    document.body.addEventListener("click", onBodyClick, { capture: true });
 
     // Return clean up function
     return () => {
-      document.body.removeEventListener("click", onBodyClick);
+      document.body.removeEventListener("click", onBodyClick, {
+        capture: true,
+      });
     };
   }, []);
 
   const dropdownOptions = options.map((option) => {
     // Hide already selected option from dropdown by returning null
-    if (option.color === selected.color) {
+    if (option.value === selected.value) {
       return null;
     }
 
     return (
       <div
-        key={option.color}
-        value={option.color}
+        key={option.value}
+        value={option.value}
         className="item"
-        style={{ color: option.color }}
+        style={{ color: option.value }}
         onClick={() => onChangeSelected(option)}
       >
         {option.label}
@@ -43,7 +43,7 @@ const Dropdown = ({ options, selected, onChangeSelected }) => {
   return (
     <div ref={ref} className="ui form">
       <div className="field">
-        <label className="label">Select a color</label>
+        <label className="label">{label}</label>
         <div
           onClick={() => setOpen(!open)}
           className={`ui selection dropdown ${open && "visible active"}`}
@@ -54,7 +54,7 @@ const Dropdown = ({ options, selected, onChangeSelected }) => {
             {dropdownOptions}
           </div>
         </div>
-        <p style={{ color: selected.color }}>{selected.label}</p>
+        <p style={{ color: selected.value }}>{selected.label}</p>
       </div>
     </div>
   );

@@ -1,18 +1,18 @@
 export const options = [
   {
     label: "A shade of blue",
-    color: "blue",
+    value: "blue",
   },
   {
     label: "A touch of red",
-    color: "red",
+    value: "red",
   },
   {
     label: "A warm orange",
-    color: "orange",
+    value: "orange",
   },
   {
     label: "A relaxing green",
-    color: "green",
+    value: "green",
   },
 ];
