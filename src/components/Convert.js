@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import googleapi from "../api/googleapi";
 
 const Convert = ({ language, text }) => {
+  const { value: target } = language;
   useEffect(() => {
-    const search = async () => {
-      const response = await googleapi.post("", {
+    googleapi.post(
+      "",
+      {}, // Translate API 2nd argument is for body params
+      {
         params: {
           q: text,
-          target: language,
-          //   apiKey
+          target: target,
+          key: "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM",
         },
-      });
-    };
-  }, [language, text]);
+      }
+    );
+  }, [target, text]);
 
   return <div></div>;
 };

@@ -8,7 +8,15 @@ export const languages = [
     value: "ar",
   },
   {
+    label: "Dutch",
+    value: "nl",
+  },
+  {
     label: "Hindi",
     value: "hi",
+  },
+  {
+    label: "Italian",
+    value: "it",
   },
 ];
