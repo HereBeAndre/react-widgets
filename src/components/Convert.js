@@ -25,7 +25,7 @@ const Convert = ({ language, text }) => {
           params: {
             q: debounceText,
             target: target,
-            key: "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM",
+            // Add key
           },
         }
       );
