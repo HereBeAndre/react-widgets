@@ -3,15 +3,27 @@ import googleapi from "../api/googleapi";
 
 const Convert = ({ language, text }) => {
   const [translatedText, setTranslatedText] = useState("");
+  const [debounceText, setDebounceText] = useState(text);
   const { value: target } = language;
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebounceText(text);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [text]);
+
   useEffect(() => {
     const doTranslation = async () => {
       const { data } = await googleapi.post(
         "",
-        {}, // Translate API 2nd argument is for body params
+        {}, // Google Translate API 2nd argument is for body params
         {
           params: {
-            q: text,
+            q: debounceText,
             target: target,
             key: "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM",
           },
@@ -19,10 +31,8 @@ const Convert = ({ language, text }) => {
       );
       setTranslatedText(data.data.translations[0].translatedText);
     };
-
-    doTranslation();
-    console.log(translatedText);
-  }, [target, text]);
+    debounceText && doTranslation();
+  }, [target, debounceText]);
 
   return (
     <div>
