@@ -21,31 +21,30 @@ const items = [
   },
 ];
 
-const showComponent = () => {
-  if (window.location.pathname === "/") {
-    return <Accordion items={items} />;
-  }
-  if (window.location.pathname === "/search") {
-    return <Search />;
-  }
-  if (window.location.pathname === "/dropdown") {
-    return (
-      <Dropdown
-      // selected={selected}
-      // onChangeSelected={setSelected}
-      // options={options}
-      // label="Select a color"
-      />
-    );
-  }
-  if (window.location.pathname === "/translate") {
-    return <Translate />;
+const showComponent = (route, component) => {
+  if (window.location.pathname === route) {
+    return component;
   }
 };
 
 const App = () => {
   // const [selected, setSelected] = useState(options[0]);
-  return <div>{showComponent()}</div>;
+  return (
+    <div>
+      {showComponent("/", <Accordion items={items} />)}
+      {showComponent("/search", <Search />)}
+      {showComponent(
+        "/dropdown",
+        <Dropdown
+        // selected={selected}
+        // onChangeSelected={setSelected}
+        // options={options}
+        // label="Select a color"
+        />
+      )}
+      {showComponent("/translate", <Translate />)}
+    </div>
+  );
 };
 
 export default App;
