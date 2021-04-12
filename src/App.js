@@ -6,6 +6,7 @@ import Translate from "./components/Translate";
 import Route from "./components/Route";
 
 import { options } from "./data";
+import Header from "./components/Header";
 
 const items = [
   {
@@ -26,6 +27,7 @@ const App = () => {
   const [selected, setSelected] = useState(options[0]);
   return (
     <div>
+      <Header />
       <Route pathname="/">
         <Accordion items={items} />
       </Route>
